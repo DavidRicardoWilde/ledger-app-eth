@@ -63,7 +63,7 @@ parser.add_argument('--path', help="BIP 32 path to sign with")
 parser.add_argument('--data', help="Data to add, hex encoded")
 parser.add_argument('--systemflag', help="always 0", default='0', type=int)
 parser.add_argument('--shardingflag', help="always 0", default='0', type=int)
-parser.add_argument('--via', help="always 0", default='0x00000000000000000000000000000000000000000', type=str)
+parser.add_argument('--via', help="always 0", default='0x0000000000000000000000000000000000000000', type=str)
 args = parser.parse_args()
 
 if args.path == None:
@@ -88,7 +88,7 @@ tx = Transaction(
     data=args.data,
     systemflag=0,
     shardingflag=0,
-    via=decode_hex(args.to[2:]),
+    via=decode_hex(args.via[2:]),
     v=CHAIN_ID,
     r=0,
     s=0
