@@ -398,6 +398,7 @@ static parserStatus_e processTxInternal(txContext_t *context) {
             case TX_RLP_NONCE:
                 processNonce(context);
                 break;
+            case TX_RLP_SYSTEMFLAG:
             case TX_RLP_GASPRICE:
                 processGasprice(context);
                 break;
@@ -411,7 +412,6 @@ static parserStatus_e processTxInternal(txContext_t *context) {
                 processTo(context);
                 break;
             case TX_RLP_DATA:
-            case TX_RLP_SYSTEMFLAG:
             case TX_RLP_SHARDINGFLAG:
             case TX_RLP_VIA:
                 processVia(context);
