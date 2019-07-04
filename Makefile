@@ -1,23 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@DavidRicardoWilde 
-0
-0 65 DavidRicardoWilde/ledger-app-eth
-forked from LedgerHQ/ledger-app-eth
- Code  Pull requests 0  Projects 0  Wiki  Security  Insights  Settings
-ledger-app-eth/Makefile
-@DavidRicardoWilde DavidRicardoWilde Edit Makfile
-23fb1aa 23 hours ago
-@TamtamHero @mkrufky @btchip @clementperon @thanhson1085 @ortegaalfredo @oto-ledger @Nicemanss @DavidRicardoWilde
-Executable File  261 lines (230 sloc)  9.66 KB
-    
 #*******************************************************************************
 #   Ledger App
 #   (c) 2017 Ledger
@@ -278,15 +258,4 @@ dep/%.d: %.c Makefile
 
 listvariants:
 	@echo VARIANTS CHAIN ethereum ethereum_classic expanse poa rsk rsk_testnet ubiq wanchain kusd pirl akroma atheios callisto ethersocial ether1 gochain musicoin ethergem mix ellaism reosc hpb tomochain tobalaba
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
