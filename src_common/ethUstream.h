@@ -47,9 +47,9 @@ typedef enum rlpTxField_e {
     TX_RLP_TO,
     TX_RLP_VALUE,
     TX_RLP_DATA,
-    TX_RLP_SYSTEMFLAG,
-    TX_RLP_SHARDINGFLAG,
-    TX_RLP_VIA, //增加上面三个字段
+    // TX_RLP_SYSTEMFLAG,
+    // TX_RLP_SHARDINGFLAG,
+    // TX_RLP_VIA, //增加上面三个字段
     TX_RLP_V,
     TX_RLP_R,
     TX_RLP_S,
