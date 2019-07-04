@@ -385,9 +385,6 @@ static parserStatus_e processTxInternal(txContext_t *context) {
                 processTo(context);
                 break;
             case TX_RLP_DATA:
-            // case TX_RLP_SYSTEMFLAG:
-            // case TX_RLP_SHARDINGFLAG:
-            // case TX_RLP_VIA: //增加三个字段的相关处理
             case TX_RLP_R:
             case TX_RLP_S:
                 processData(context);
