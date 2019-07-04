@@ -37,20 +37,20 @@ def sha3(seed):
 class Transaction(Serializable):
     fields = [
         ('nonce', big_endian_int),
+        ('systemflag',big_endian_int),
         ('gasprice', big_endian_int),
         ('startgas', big_endian_int),
         ('to', address),
         ('value', big_endian_int),
         ('data', binary),
-	('systemflag',big_endian_int),
-	('shardingflag',big_endian_int),
-	('via', address),
+	    ('shardingflag',big_endian_int),
+	    ('via', address),
         ('v', big_endian_int),
         ('r', big_endian_int),
         ('s', big_endian_int),
     ]
-def __init__(self, nonce, gasprice, startgas, to, value, data, systemflag=0, shardingflag=0, via='000000000000000000000000000000', v=0, r=0, s=0):super(Transaction, self).__init__(
-            nonce, gasprice, startgas, to, value, data, systemflag, shardingflag, via, v, r, s)
+def __init__(self, nonce, systemflag, gasprice, startgas, to, value, data, shardingflag=0, via='000000000000000000000000000000', v=0, r=0, s=0):super(Transaction, self).__init__(
+            nonce, systemflag, gasprice, startgas, to, value, data, shardingflag, via, v, r, s)
 
 #        def __init__(self, nonce, gasprice, startgas, to, value, data, v=0, r=0, s=0, systemflag=0, shardingflag=0):
  #       super(Transaction, self).__init_(
