@@ -81,12 +81,12 @@ amount = Decimal(args.amount) * 10**18
 
 tx = Transaction(
     nonce=int(args.nonce),
+    systemflag=0,
     gasprice=int(args.gasprice),
     startgas=int(args.startgas),
     to=decode_hex(args.to[2:]),
     value=int(amount),
     data=args.data,
-    systemflag=0,
     shardingflag=0,
     via=decode_hex(args.via[2:]),
     v=CHAIN_ID,
@@ -129,8 +129,8 @@ s = int(binascii.hexlify(result[1 + 32: 1 + 32 + 32]), 16)
 print('r: ',r)
 print('s: ',s)
 
-tx = Transaction(tx.nonce, tx.gasprice, tx.startgas,
-                 tx.to, tx.value, tx.data, tx.systemflag, tx.shardingflag, tx.via, v, r, s)
+tx = Transaction(tx.nonce, tx.systemflag, tx.gasprice, tx.startgas,
+                 tx.to, tx.value, tx.data, tx.shardingflag, tx.via, v, r, s)
 
 #tx = Transaction(tx.nonce, tx.gasprice, tx.startgas,
 #                 tx.to, tx.value, tx.data, v, r, s)
