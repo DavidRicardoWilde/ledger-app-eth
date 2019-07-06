@@ -17,10 +17,10 @@
 
 #include <stdint.h>
 
-#include "ethUstream.h"
-// #include "mcUstream.h"
-#include "ethUtils.h"
-// #include "mcUtils.h"
+// #include "ethUstream.h"
+#include "mcUstream.h"
+// #include "ethUtils.h"
+#include "mcUtils.h"
 
 #define MAX_INT256 32
 #define MAX_ADDRESS 20

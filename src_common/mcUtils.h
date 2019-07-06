@@ -15,10 +15,10 @@
 *  limitations under the License.
 ********************************************************************************/
 
-#ifndef _ETHUTILS_H_
-// #ifndef _MCUTILS_H_
-#define _ETHUTILS_H_
-// #define _MCUTILS_H_
+// #ifndef _ETHUTILS_H_
+#ifndef _MCUTILS_H_
+// #define _ETHUTILS_H_
+#define _MCUTILS_H_
 
 #include <stdint.h>
 
@@ -41,23 +41,23 @@ bool rlpDecodeLength(uint8_t *buffer, uint32_t bufferLength,
 
 bool rlpCanDecode(uint8_t *buffer, uint32_t bufferLength, bool *valid);
 
-void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
-                                cx_sha3_t *sha3Context);
-// void getMcAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
+// void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
 //                                 cx_sha3_t *sha3Context);
-
-void getEthAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
+void getMcAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
                                 cx_sha3_t *sha3Context);
-// void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
-//                                 cx_sha3_t *sha3Context);
 
-void getEthAddressStringFromBinary(uint8_t *address, uint8_t *out,
-                                   cx_sha3_t *sha3Context);
-// void getMcAddressStringFromBinary(uint8_t *address, uint8_t *out,
+// void getEthAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
+//                                 cx_sha3_t *sha3Context);
+void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
+                                cx_sha3_t *sha3Context);
+
+// void getEthAddressStringFromBinary(uint8_t *address, uint8_t *out,
 //                                    cx_sha3_t *sha3Context);
+void getMcAddressStringFromBinary(uint8_t *address, uint8_t *out,
+                                   cx_sha3_t *sha3Context);
 
 bool adjustDecimals(char *src, uint32_t srcLength, char *target,
                     uint32_t targetLength, uint8_t decimals);
 
-#endif /* _ETHUTILS_H_ */
-// #endif /* _MCUTILS_H_ */
+// #endif /* _ETHUTILS_H_ */
+#endif /* _MCUTILS_H_ */

@@ -15,10 +15,10 @@
 *  limitations under the License.
 ********************************************************************************/
 
-#ifndef _ETHUSTREAM_H_
-// #ifndef _MCUSTREAM_H_
-#define _ETHUSTREAM_H_
-// #define _MCUSTREAM_H_
+// #ifndef _ETHUSTREAM_H_
+#ifndef _MCUSTREAM_H_
+// #define _ETHUSTREAM_H_
+#define _MCUSTREAM_H_
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -107,5 +107,5 @@ parserStatus_e continueTx(txContext_t *context);
 void copyTxData(txContext_t *context, uint8_t *out, uint32_t length);
 uint8_t readTxByte(txContext_t *context);
 
-#endif /* _ETHUSTREAM_H_ */
-// #endif /* _MCUSTREAM_H_ */
+// #endif /* _ETHUSTREAM_H_ */
+#endif /* _MCUSTREAM_H_ */
