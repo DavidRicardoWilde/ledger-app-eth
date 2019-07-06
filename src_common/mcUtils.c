@@ -164,8 +164,8 @@ void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
     uint8_t hashAddress[32];
     cx_keccak_init(sha3Context, 256);
     cx_hash((cx_hash_t*)sha3Context, CX_LAST, publicKey->W + 1, 64, hashAddress);
-    getEtcAddressStringFromBinary(hashAddress + 12, out, sha3Context);
-    // getMcAddressStringFromBinary(hashAddress + 12, out, sha3Context);
+    // getEtcAddressStringFromBinary(hashAddress + 12, out, sha3Context);
+    getMcAddressStringFromBinary(hashAddress + 12, out, sha3Context);
 }
 
 
