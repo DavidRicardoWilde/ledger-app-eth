@@ -201,7 +201,7 @@ void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
 
 // void getEthAddressStringFromBinary(uint8_t *address, uint8_t *out,
 //                                    cx_sha3_t *sha3Context) {
-void getAddressStringFromBinary(uint8_t *address, uint8_t *out,
+void getMcAddressStringFromBinary(uint8_t *address, uint8_t *out,
                                    cx_sha3_t *sha3Context) {
     uint8_t hashChecksum[32];
     uint8_t tmp[100];
