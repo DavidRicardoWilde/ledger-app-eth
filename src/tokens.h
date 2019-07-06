@@ -31,6 +31,7 @@ typedef struct tokenDefinition_t {
 #define NUM_TOKENS_AKROMA 0
 #define NUM_TOKENS_ELLAISM 1
 #define NUM_TOKENS_ETHEREUM 1102
+// #define NUM_TOKENS_MOAC 1102
 #define NUM_TOKENS_ETHEREUM_CLASSIC 4
 #define NUM_TOKENS_ETHERSOCIAL 0
 #define NUM_TOKENS_ETHER1 0
@@ -55,6 +56,7 @@ typedef struct tokenDefinition_t {
 extern tokenDefinition_t const TOKENS_AKROMA[NUM_TOKENS_AKROMA];
 extern tokenDefinition_t const TOKENS_ELLAISM[NUM_TOKENS_ELLAISM];
 extern tokenDefinition_t const TOKENS_ETHEREUM[NUM_TOKENS_ETHEREUM];
+// extern tokenDefinition_t const TOKENS_MOAC[NUM_TOKENS_MOAC];
 extern tokenDefinition_t const TOKENS_ETHEREUM_CLASSIC[NUM_TOKENS_ETHEREUM_CLASSIC];
 extern tokenDefinition_t const TOKENS_ETHERSOCIAL[NUM_TOKENS_ETHERSOCIAL];
 extern tokenDefinition_t const TOKENS_ETHER1[NUM_TOKENS_ETHER1];

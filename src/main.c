@@ -22,7 +22,9 @@
 #include "os.h"
 #include "cx.h"
 #include "ethUstream.h"
+// #include "MCUstream.h"
 #include "ethUtils.h"
+// #include "mcUtils.h"
 #include "uint256.h"
 #include "tokens.h"
 #include "chainConfig.h"
@@ -75,6 +77,7 @@ void finalizeParsing(bool);
 #define OFFSET_CDATA 5
 
 #define WEI_TO_ETHER 18
+// #define WEI_TO_MC 18
 
 static const uint8_t const TOKEN_TRANSFER_ID[] = { 0xa9, 0x05, 0x9c, 0xbb };
 
@@ -195,6 +198,8 @@ static const char const CONTRACT_ADDRESS[] = "New contract";
 
 static const char const SIGN_MAGIC[] = "\x19"
                                        "Ethereum Signed Message:\n";
+// static const char const SIGN_MAGIC[] = "\x19"
+//                                        "MOAC Signed Message:\n";
 
 chain_config_t *chainConfig;
 
@@ -1789,6 +1794,9 @@ tokenDefinition_t* getKnownToken() {
         case CHAIN_KIND_ETHEREUM:
             numTokens = NUM_TOKENS_ETHEREUM;
             break;
+        // case CHAIN_KIND_MOAC:
+        //     numTokens = NUM_TOKENS_MOAC;
+        //     break;
         case CHAIN_KIND_ETHEREUM_CLASSIC:
             numTokens = NUM_TOKENS_ETHEREUM_CLASSIC;
             break;
@@ -1861,6 +1869,9 @@ tokenDefinition_t* getKnownToken() {
             case CHAIN_KIND_ETHEREUM:
                 currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHEREUM[i]);
                 break;
+            // case CHAIN_KIND_MOAC:
+            //     currentToken = (tokenDefinition_t *)PIC(&TOKENS_MOAC[i]);
+            //     break;
             case CHAIN_KIND_ETHEREUM_CLASSIC:
                 currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHEREUM_CLASSIC[i]);
                 break;
@@ -2098,6 +2109,7 @@ void handleGetPublicKey(uint8_t p1, uint8_t p2, uint8_t *dataBuffer, uint16_t da
   os_memset(&privateKey, 0, sizeof(privateKey));
   os_memset(privateKeyData, 0, sizeof(privateKeyData));
   getEthAddressStringFromKey(&tmpCtx.publicKeyContext.publicKey, tmpCtx.publicKeyContext.address, &sha3);
+  // getMcAddressStringFromKey(&tmpCtx.publicKeyContext.publicKey, tmpCtx.publicKeyContext.address, &sha3);
 #ifndef NO_CONSENT
   if (p1 == P1_NON_CONFIRM)
 #endif // NO_CONSENT
@@ -2141,6 +2153,7 @@ void finalizeParsing(bool direct) {
   uint32_t i;
   uint8_t address[41];
   uint8_t decimals = WEI_TO_ETHER;
+  // uint8_t decimals = WEI_TO_MC;
   uint8_t *ticker = (uint8_t *)PIC(chainConfig->coinName);
   uint8_t *feeTicker = (uint8_t *)PIC(chainConfig->coinName);
   uint8_t tickerOffset = 0;
@@ -2191,6 +2204,7 @@ void finalizeParsing(bool direct) {
   // Add address
   if (tmpContent.txContent.destinationLength != 0) {
     getEthAddressStringFromBinary(tmpContent.txContent.destination, address, &sha3);
+    // getMcAddressStringFromBinary(tmpContent.txContent.destination, address, &sha3);
     /*
     addressSummary[0] = '0';
     addressSummary[1] = 'x';
@@ -2239,6 +2253,7 @@ void finalizeParsing(bool direct) {
     i++;
   }
   adjustDecimals((char *)(G_io_apdu_buffer + 100), i, (char *)G_io_apdu_buffer, 100, WEI_TO_ETHER);
+    adjustDecimals((char *)(G_io_apdu_buffer + 100), i, (char *)G_io_apdu_buffer, 100, WEI_TO_MC);
   i = 0;
   tickerOffset=0;
   while (feeTicker[tickerOffset]) {
@@ -2696,6 +2711,7 @@ chain_config_t const C_chain_config = {
 
 __attribute__((section(".boot"))) int main(int arg0) {
 #ifdef USE_LIB_ETHEREUM
+// #ifdef USE_LIB_MOAC
     chain_config_t local_chainConfig;
     os_memmove(&local_chainConfig, &C_chain_config, sizeof(chain_config_t));
     unsigned int libcall_params[3];
@@ -2713,6 +2729,7 @@ __attribute__((section(".boot"))) int main(int arg0) {
             check_api_level(CX_COMPAT_APILEVEL);
             // delegate to Ethereum app/lib
             libcall_params[0] = "Ethereum";
+            // libcall_params[0] = "Moac";
             libcall_params[1] = 0x100; // use the Init call, as we won't exit
             libcall_params[2] = &local_chainConfig;
             os_lib_call(&libcall_params);

@@ -19,6 +19,7 @@
 #include <string.h>
 
 #include "ethUstream.h"
+// #include "mcUstream.h"
 #include "uint256.h"
 
 static const unsigned char hex_digits[] = {'0', '1', '2', '3', '4', '5', '6', '7',

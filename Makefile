@@ -21,6 +21,7 @@ endif
 include $(BOLOS_SDK)/Makefile.defines
 
 DEFINES_LIB = USE_LIB_ETHEREUM
+#DEFINES_LIB = USE_LIB_MOAC
 APP_LOAD_PARAMS= --curve secp256k1 $(COMMON_LOAD_PARAMS)
 # Allow the app to use path 45 for multi-sig (see BIP45).
 APP_LOAD_PARAMS += --path "45'"
@@ -30,6 +31,7 @@ APPVERSION_N=2
 APPVERSION_P=3
 APPVERSION=$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
 APP_LOAD_FLAGS= --appFlags 0x240 --dep Ethereum:$(APPVERSION)
+# APP_LOAD_FLAGS= --appFlags 0x240 --dep Moac:$(APPVERSION)
 
 ifeq ($(CHAIN),)
 CHAIN=ethereum
@@ -37,11 +39,13 @@ CHAIN=ethereum
 endif
 
 ifeq ($(CHAIN),ethereum)
+# ifeq ($(CHAIN),moac)
 # Lock the application on its standard path for 1.5. Please complain if non compliant
 APP_LOAD_PARAMS += --path "44'/60'"
 DEFINES += CHAINID_UPCASE=\"ETHEREUM\" CHAINID_COINNAME=\"ETH\" CHAIN_KIND=CHAIN_KIND_ETHEREUM CHAIN_ID=0
 #DEFINES += CHAINID_UPCASE=\"MOAC\" CHAINID_COINNAME=\"MC\" CHAIN_KIND=CHAIN_KIND_MOAC CHAIN_ID=99
 APPNAME = "Ethereum"
+# APPNAME = "Moac"
 DEFINES_LIB=
 APP_LOAD_FLAGS=--appFlags 0xa40
 else ifeq ($(CHAIN),ellaism)
@@ -147,8 +151,9 @@ APP_LOAD_PARAMS += $(APP_LOAD_FLAGS) --path "44'/1'"
 DEFINES += $(DEFINES_LIB)
 
 #prepare hsm generation
+#需要增加相应的图标
 ifeq ($(TARGET_NAME),TARGET_BLUE)
-ICONNAME=blue_app_$(CHAIN).gif
+ICONNAME=blue_app_$(CHAIN).gif 
 else
 ifeq ($(TARGET_NAME), TARGET_NANOX)
 ICONNAME=nanox_app_$(CHAIN).gif
