@@ -22,7 +22,7 @@ from __future__ import print_function
 from ledgerblue.comm import getDongle
 from ledgerblue.commException import CommException
 from decimal import Decimal
-from ethBase import sha3
+from mcBase import sha3
 from eth_keys import KeyAPI
 import argparse
 import struct
@@ -33,8 +33,8 @@ CHAIN_ID = 0
 # CHAIN_ID = 99
 
 # Magic define
-SIGN_MAGIC = b'\x19Ethereum Signed Message:\n'
-# SIGN_MAGIC = b'\x19Moac Signed Message:\n'
+# SIGN_MAGIC = b'\x19Ethereum Signed Message:\n'
+SIGN_MAGIC = b'\x19Moac Signed Message:\n'
 
 def parse_bip32_path(path):
     if len(path) == 0:
