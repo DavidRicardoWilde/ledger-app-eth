@@ -29,7 +29,7 @@ from ethBase import Transaction, UnsignedTransaction, unsigned_tx_from_tx
 from rlp import encode
 
 # Define here Chain_ID for EIP-155
-CHAIN_ID = 99
+CHAIN_ID = 101
 
 try:
     from rlp.utils import decode_hex, encode_hex, str_to_bytes

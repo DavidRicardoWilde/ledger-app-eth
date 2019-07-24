@@ -30,7 +30,7 @@ import binascii
 
 # Define here Chain_ID
 #CHAIN_ID = 0
-CHAIN_ID = 99
+CHAIN_ID = 101
 
 # Magic define
 SIGN_MAGIC = b'\x19Ethereum Signed Message:\n'
