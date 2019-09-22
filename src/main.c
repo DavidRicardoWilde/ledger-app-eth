@@ -2217,7 +2217,7 @@ void handleSign(uint8_t p1, uint8_t p2, uint8_t *workBuffer, uint16_t dataLength
     PRINTF("Parser not initialized\n");
     THROW(0x6985);
   }
-  txResult = processTx(&txContext, workBuffer, dataLength, (chainConfig->kind == CHAIN_KIND_MOAC ? TX_FLAG_TYPE : 0));
+  txResult = processTx(&txContext, workBuffer, dataLength, 0);
   switch (txResult) {
     case USTREAM_SUSPENDED:
       break;
