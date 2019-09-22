@@ -20,8 +20,7 @@ $(error Environment variable BOLOS_SDK is not set)
 endif
 include $(BOLOS_SDK)/Makefile.defines
 
-DEFINES_LIB = USE_LIB_ETHEREUM
-#DEFINES_LIB = USE_LIB_MOAC
+DEFINES_LIB = USE_LIB_MOAC
 APP_LOAD_PARAMS= --curve secp256k1 $(COMMON_LOAD_PARAMS)
 # Allow the app to use path 45 for multi-sig (see BIP45).
 APP_LOAD_PARAMS += --path "45'"
@@ -30,35 +29,26 @@ APPVERSION_M=1
 APPVERSION_N=2
 APPVERSION_P=3
 APPVERSION=$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
-# APP_LOAD_FLAGS= --appFlags 0x240 --dep Ethereum:$(APPVERSION)
 APP_LOAD_FLAGS= --appFlags 0x240 --dep Moac:$(APPVERSION)
 
 ifeq ($(CHAIN),)
-# CHAIN=ethereum
 CHAIN=moac
 endif
 
-# ifeq ($(CHAIN),ethereum)
 ifeq ($(CHAIN),moac)
 # Lock the application on its standard path for 1.5. Please complain if non compliant
 APP_LOAD_PARAMS += --path "44'/60'"
-# DEFINES += CHAINID_UPCASE=\"ETHEREUM\" CHAINID_COINNAME=\"ETH\" CHAIN_KIND=CHAIN_KIND_ETHEREUM CHAIN_ID=0
-DEFINES += CHAINID_UPCASE=\"MOAC\" CHAINID_COINNAME=\"MC\" CHAIN_KIND=CHAIN_KIND_MOAC CHAIN_ID=101
-# APPNAME = "Ethereum"
+DEFINES += CHAINID_UPCASE=\"MOAC\" CHAINID_COINNAME=\"MC\" CHAIN_KIND=CHAIN_KIND_MOAC CHAIN_ID=99
 APPNAME = "Moac"
 DEFINES_LIB=
 APP_LOAD_FLAGS=--appFlags 0xa40
-else ifeq ($(CHAIN),ellaism)
-APP_LOAD_PARAMS += --path "44'/163'"
-DEFINES += CHAINID_UPCASE=\"ELLA\" CHAINID_COINNAME=\"ELLA\" CHAIN_KIND=CHAIN_KIND_ELLAISM CHAIN_ID=64
-APPNAME = "Ellaism"
-else ifeq ($(CHAIN),wanchain)
+else ifeq ($(CHAIN),dev)
 APP_LOAD_PARAMS += --path "44'/5718350'"
-DEFINES += CHAINID_UPCASE=\"WAN\" CHAINID_COINNAME=\"WAN\" CHAIN_KIND=CHAIN_KIND_WANCHAIN CHAIN_ID=1
-APPNAME = "Wanchain"
+DEFINES += CHAINID_UPCASE=\"DEV\" CHAINID_COINNAME=\"MC\" CHAIN_KIND=CHAIN_KIND_DEV CHAIN_ID=101
+APPNAME = "Develop"
 else
 ifeq ($(filter clean,$(MAKECMDGOALS)),)
-$(error Unsupported CHAIN - use moac, ellaism, wanchain)
+$(error Unsupported CHAIN - use moac, devlop)
 endif
 endif
 
@@ -178,5 +168,5 @@ include $(BOLOS_SDK)/Makefile.rules
 dep/%.d: %.c Makefile
 
 listvariants:
-	@echo VARIANTS CHAIN ethereum ethereum_classic expanse poa rsk rsk_testnet ubiq wanchain kusd pirl akroma atheios callisto ethersocial ether1 gochain musicoin ethergem mix ellaism reosc hpb tomochain tobalaba
+	@echo VARIANTS CHAIN moac dev
 :

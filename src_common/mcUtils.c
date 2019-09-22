@@ -29,7 +29,6 @@
 
 #include "os.h"
 #include "cx.h"
-// #include "ethUtils.h"
 #include "mcUtils.h"
 #include "chainConfig.h"
 
@@ -121,8 +120,6 @@ bool rlpDecodeLength(uint8_t *buffer, uint32_t bufferLength,
     return true;
 }
 
-// void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
-//                                 cx_sha3_t *sha3Context) {
 void getMcAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
                                 cx_sha3_t *sha3Context) {
     uint8_t hashAddress[32];
@@ -157,8 +154,6 @@ char convertDigit(uint8_t *address, uint8_t index, uint8_t *hash) {
     }
 }
 
-// void getEthAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
-//                                 cx_sha3_t *sha3Context) {
 void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
                                 cx_sha3_t *sha3Context) {
     uint8_t hashAddress[32];
@@ -168,9 +163,6 @@ void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
     getMcAddressStringFromBinary(hashAddress + 12, out, sha3Context);
 }
 
-
-// void getEthAddressStringFromBinary(uint8_t *address, uint8_t *out,
-//                                    cx_sha3_t *sha3Context) {
 void getMcAddressStringFromBinary(uint8_t *address, uint8_t *out,
                                    cx_sha3_t *sha3Context) {
     uint8_t hashChecksum[32];
@@ -187,20 +179,14 @@ void getMcAddressStringFromBinary(uint8_t *address, uint8_t *out,
 
 static const uint8_t const HEXDIGITS[] = "0123456789abcdef";
 
-// void getEthAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
-//                                 cx_sha3_t *sha3Context) {
 void getMcAddressStringFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out,
                                 cx_sha3_t *sha3Context) {
     uint8_t hashAddress[32];
     cx_keccak_init(sha3Context, 256);
     cx_hash((cx_hash_t*)sha3Context, CX_LAST, publicKey->W + 1, 64, hashAddress);
-    // getEthAddressStringFromBinary(hashAddress + 12, out, sha3Context);
     getMcAddressStringFromBinary(hashAddress + 12, out, sha3Context);
 }
 
-
-// void getEthAddressStringFromBinary(uint8_t *address, uint8_t *out,
-//                                    cx_sha3_t *sha3Context) {
 void getMcAddressStringFromBinary(uint8_t *address, uint8_t *out,
                                    cx_sha3_t *sha3Context) {
     uint8_t hashChecksum[32];

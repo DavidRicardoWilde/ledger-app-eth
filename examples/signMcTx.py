@@ -8,7 +8,6 @@ import argparse
 import struct
 import binascii
 from mcBase import Transaction, UnsignedTransaction, unsigned_tx_from_tx
-#from ethBase import Transaction, UnsignedTransaction, unsigned_tx_from_tx
 from rlp import encode
 
 # Define here Chain_ID for EIP-155
@@ -39,7 +38,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nonce', help="Nonce associated to the account", type=int, required=True)
 parser.add_argument('--gasprice', help="Network gas price", type=int, required=True)
 parser.add_argument('--startgas', help="startgas", default='21000', type=int)
-parser.add_argument('--amount', help="Amount to send in ether", required=True)
+parser.add_argument('--amount', help="Amount to send in moac", required=True)
 parser.add_argument('--to', help="Destination address", type=str, required=True)
 parser.add_argument('--path', help="BIP 32 path to sign with")
 parser.add_argument('--data', help="Data to add, hex encoded")

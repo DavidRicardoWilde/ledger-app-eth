@@ -28,16 +28,12 @@ typedef struct tokenDefinition_t {
 
 #ifdef HAVE_TOKENS_LIST
 
-#define NUM_TOKENS_ELLAISM 1
-// #define NUM_TOKENS_ETHEREUM 1102
 #define NUM_TOKENS_MOAC 1102
-#define NUM_TOKENS_WANCHAIN 0
+#define NUM_TOKENS_DEV 1102
 
 
-extern tokenDefinition_t const TOKENS_ELLAISM[NUM_TOKENS_ELLAISM];
-// extern tokenDefinition_t const TOKENS_ETHEREUM[NUM_TOKENS_ETHEREUM];
 extern tokenDefinition_t const TOKENS_MOAC[NUM_TOKENS_MOAC];
-extern tokenDefinition_t const TOKENS_WANCHAIN[NUM_TOKENS_WANCHAIN];
+extern tokenDefinition_t const TOKENS_DEV[NUM_TOKENS_DEV];
 
 #endif
 

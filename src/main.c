@@ -21,9 +21,7 @@
 
 #include "os.h"
 #include "cx.h"
-// #include "ethUstream.h"
 #include "mcUstream.h"
-// #include "ethUtils.h"
 #include "mcUtils.h"
 #include "uint256.h"
 #include "tokens.h"
@@ -76,7 +74,6 @@ void finalizeParsing(bool);
 #define OFFSET_LC 4
 #define OFFSET_CDATA 5
 
-// #define WEI_TO_ETHER 18
 #define WEI_TO_MC 18
 
 static const uint8_t const TOKEN_TRANSFER_ID[] = { 0xa9, 0x05, 0x9c, 0xbb };
@@ -196,8 +193,6 @@ const internalStorage_t N_storage_real;
 
 static const char const CONTRACT_ADDRESS[] = "New contract";
 
-// static const char const SIGN_MAGIC[] = "\x19"
-//                                        "Ethereum Signed Message:\n";
 static const char const SIGN_MAGIC[] = "\x19"
                                        "MOAC Signed Message:\n";
 
@@ -1788,32 +1783,20 @@ tokenDefinition_t* getKnownToken() {
     uint32_t numTokens = 0;
     uint32_t i;
     switch(chainConfig->kind) {
-        // case CHAIN_KIND_ETHEREUM:
-        //     numTokens = NUM_TOKENS_ETHEREUM;
-        //     break;
         case CHAIN_KIND_MOAC:
             numTokens = NUM_TOKENS_MOAC;
             break;
-        case CHAIN_KIND_WANCHAIN:
-            numTokens = NUM_TOKENS_WANCHAIN;
-            break;
-        case CHAIN_KIND_ELLAISM:
-            numTokens = NUM_TOKENS_ELLAISM;
+        case CHAIN_KIND_DEV:
+            numTokens = NUM_TOKENS_DEV;
             break;
     }
     for (i=0; i<numTokens; i++) {
         switch(chainConfig->kind) {
-            // case CHAIN_KIND_ETHEREUM:
-            //     currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHEREUM[i]);
-            //     break;
             case CHAIN_KIND_MOAC:
                 currentToken = (tokenDefinition_t *)PIC(&TOKENS_MOAC[i]);
                 break;
-            case CHAIN_KIND_WANCHAIN:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_WANCHAIN[i]);
-                break;
-            case CHAIN_KIND_ELLAISM:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ELLAISM[i]);
+            case CHAIN_KIND_DEV:
+                currentToken = (tokenDefinition_t *)PIC(&TOKENS_DEV[i]);
                 break;
         }
         if (os_memcmp(currentToken->address, tmpContent.txContent.destination, 20) == 0) {
@@ -1988,7 +1971,6 @@ void handleGetPublicKey(uint8_t p1, uint8_t p2, uint8_t *dataBuffer, uint16_t da
   cx_ecfp_generate_pair(CX_CURVE_256K1, &tmpCtx.publicKeyContext.publicKey, &privateKey, 1);
   os_memset(&privateKey, 0, sizeof(privateKey));
   os_memset(privateKeyData, 0, sizeof(privateKeyData));
-  // getEthAddressStringFromKey(&tmpCtx.publicKeyContext.publicKey, tmpCtx.publicKeyContext.address, &sha3);
   getMcAddressStringFromKey(&tmpCtx.publicKeyContext.publicKey, tmpCtx.publicKeyContext.address, &sha3);
 #ifndef NO_CONSENT
   if (p1 == P1_NON_CONFIRM)
@@ -2032,7 +2014,6 @@ void finalizeParsing(bool direct) {
   uint256_t gasPrice, startGas, uint256;
   uint32_t i;
   uint8_t address[41];
-  // uint8_t decimals = WEI_TO_ETHER;
   uint8_t decimals = WEI_TO_MC;
   uint8_t *ticker = (uint8_t *)PIC(chainConfig->coinName);
   uint8_t *feeTicker = (uint8_t *)PIC(chainConfig->coinName);
@@ -2083,7 +2064,6 @@ void finalizeParsing(bool direct) {
     }
   // Add address
   if (tmpContent.txContent.destinationLength != 0) {
-    // getEthAddressStringFromBinary(tmpContent.txContent.destination, address, &sha3);
     getMcAddressStringFromBinary(tmpContent.txContent.destination, address, &sha3);
     /*
     addressSummary[0] = '0';
@@ -2104,7 +2084,6 @@ void finalizeParsing(bool direct) {
     os_memmove((void*)addressSummary, CONTRACT_ADDRESS, sizeof(CONTRACT_ADDRESS));
     strcpy(strings.common.fullAddress, "Contract");
   }
-  // Add amount in ethers or tokens
   convertUint256BE(tmpContent.txContent.value.value, tmpContent.txContent.value.length, &uint256);
   tostring256(&uint256, 10, (char *)(G_io_apdu_buffer + 100), 100);
   i = 0;
@@ -2132,7 +2111,6 @@ void finalizeParsing(bool direct) {
   while (G_io_apdu_buffer[100 + i]) {
     i++;
   }
-  // adjustDecimals((char *)(G_io_apdu_buffer + 100), i, (char *)G_io_apdu_buffer, 100, WEI_TO_ETHER);
   adjustDecimals((char *)(G_io_apdu_buffer + 100), i, (char *)G_io_apdu_buffer, 100, WEI_TO_MC);
   i = 0;
   tickerOffset=0;
@@ -2245,7 +2223,7 @@ void handleSign(uint8_t p1, uint8_t p2, uint8_t *workBuffer, uint16_t dataLength
     PRINTF("Parser not initialized\n");
     THROW(0x6985);
   }
-  txResult = processTx(&txContext, workBuffer, dataLength, (chainConfig->kind == CHAIN_KIND_WANCHAIN ? TX_FLAG_TYPE : 0));
+  txResult = processTx(&txContext, workBuffer, dataLength, (chainConfig->kind == CHAIN_KIND_DEV ? TX_FLAG_TYPE : 0));
   switch (txResult) {
     case USTREAM_SUSPENDED:
       break;
@@ -2590,7 +2568,6 @@ chain_config_t const C_chain_config = {
 };
 
 __attribute__((section(".boot"))) int main(int arg0) {
-// #ifdef USE_LIB_ETHEREUM
 #ifdef USE_LIB_MOAC
     chain_config_t local_chainConfig;
     os_memmove(&local_chainConfig, &C_chain_config, sizeof(chain_config_t));
@@ -2607,8 +2584,6 @@ __attribute__((section(".boot"))) int main(int arg0) {
         TRY {
             // ensure syscall will accept us
             check_api_level(CX_COMPAT_APILEVEL);
-            // delegate to Ethereum app/lib
-            // libcall_params[0] = "Ethereum";
             libcall_params[0] = "Moac";
             libcall_params[1] = 0x100; // use the Init call, as we won't exit
             libcall_params[2] = &local_chainConfig;

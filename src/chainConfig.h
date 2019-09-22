@@ -25,8 +25,7 @@
 typedef enum chain_kind_e {
 	//CHAIN_KIND_ETHEREUM,
 	CHAIN_KIND_MOAC,
-	CHAIN_KIND_WANCHAIN,
-	CHAIN_KIND_ELLAISM,
+	CHAIN_KIND_DEV
 } chain_kind_t;
 
 typedef struct chain_config_s {
