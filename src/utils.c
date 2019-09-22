@@ -18,7 +18,6 @@
 #include <stdint.h>
 #include <string.h>
 
-// #include "ethUstream.h"
 #include "mcUstream.h"
 #include "uint256.h"
 

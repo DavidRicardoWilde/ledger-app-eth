@@ -21,9 +21,7 @@
 
 #include "os.h"
 #include "cx.h"
-// #include "ethUstream.h"
 #include "mcUstream.h"
-// #include "ethUtils.h"
 #include "mcUtils.h"
 #include "uint256.h"
 #include "tokens.h"
@@ -76,7 +74,6 @@ void finalizeParsing(bool);
 #define OFFSET_LC 4
 #define OFFSET_CDATA 5
 
-// #define WEI_TO_ETHER 18
 #define WEI_TO_MC 18
 
 static const uint8_t const TOKEN_TRANSFER_ID[] = { 0xa9, 0x05, 0x9c, 0xbb };
@@ -196,8 +193,6 @@ const internalStorage_t N_storage_real;
 
 static const char const CONTRACT_ADDRESS[] = "New contract";
 
-// static const char const SIGN_MAGIC[] = "\x19"
-//                                        "Ethereum Signed Message:\n";
 static const char const SIGN_MAGIC[] = "\x19"
                                        "MOAC Signed Message:\n";
 
@@ -1788,152 +1783,14 @@ tokenDefinition_t* getKnownToken() {
     uint32_t numTokens = 0;
     uint32_t i;
     switch(chainConfig->kind) {
-        case CHAIN_KIND_AKROMA:
-            numTokens = NUM_TOKENS_AKROMA;
-            break;
-        // case CHAIN_KIND_ETHEREUM:
-        //     numTokens = NUM_TOKENS_ETHEREUM;
-        //     break;
         case CHAIN_KIND_MOAC:
             numTokens = NUM_TOKENS_MOAC;
-            break;
-        case CHAIN_KIND_ETHEREUM_CLASSIC:
-            numTokens = NUM_TOKENS_ETHEREUM_CLASSIC;
-            break;
-        case CHAIN_KIND_PIRL:
-            numTokens = NUM_TOKENS_PIRL;
-            break;
-        case CHAIN_KIND_POA:
-            numTokens = NUM_TOKENS_POA;
-            break;
-        case CHAIN_KIND_RSK:
-            numTokens = NUM_TOKENS_RSK;
-            break;
-        case CHAIN_KIND_EXPANSE:
-            numTokens = NUM_TOKENS_EXPANSE;
-            break;
-        case CHAIN_KIND_UBIQ:
-            numTokens = NUM_TOKENS_UBIQ;
-            break;
-        case CHAIN_KIND_WANCHAIN:
-            numTokens = NUM_TOKENS_WANCHAIN;
-            break;
-        case CHAIN_KIND_KUSD:
-            numTokens = NUM_TOKENS_KUSD;
-            break;
-        case CHAIN_KIND_MUSICOIN:
-            numTokens = NUM_TOKENS_MUSICOIN;
-            break;
-        case CHAIN_KIND_CALLISTO:
-            numTokens = NUM_TOKENS_CALLISTO;
-            break;
-        case CHAIN_KIND_ETHERSOCIAL:
-            numTokens = NUM_TOKENS_ETHERSOCIAL;
-            break;
-        case CHAIN_KIND_ELLAISM:
-            numTokens = NUM_TOKENS_ELLAISM;
-            break;
-        case CHAIN_KIND_ETHER1:
-            numTokens = NUM_TOKENS_ETHER1;
-            break;
-        case CHAIN_KIND_ETHERGEM:
-            numTokens = NUM_TOKENS_ETHERGEM;
-            break;
-        case CHAIN_KIND_ATHEIOS:
-            numTokens = NUM_TOKENS_ATHEIOS;
-            break;
-        case CHAIN_KIND_GOCHAIN:
-            numTokens = NUM_TOKENS_GOCHAIN;
-            break;
-        case CHAIN_KIND_MIX:
-            numTokens = NUM_TOKENS_MIX;
-            break;
-        case CHAIN_KIND_REOSC:
-            numTokens = NUM_TOKENS_REOSC;
-            break;
-        case CHAIN_KIND_HPB:
-            numTokens = NUM_TOKENS_HPB;
-            break;
-        case CHAIN_KIND_TOMOCHAIN:
-            numTokens = NUM_TOKENS_TOMOCHAIN;
-            break;
-        case CHAIN_KIND_TOBALABA:
-            numTokens = NUM_TOKENS_TOBALABA;
             break;
     }
     for (i=0; i<numTokens; i++) {
         switch(chainConfig->kind) {
-            case CHAIN_KIND_AKROMA:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_AKROMA[i]);
-                break;
-            // case CHAIN_KIND_ETHEREUM:
-            //     currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHEREUM[i]);
-            //     break;
             case CHAIN_KIND_MOAC:
                 currentToken = (tokenDefinition_t *)PIC(&TOKENS_MOAC[i]);
-                break;
-            case CHAIN_KIND_ETHEREUM_CLASSIC:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHEREUM_CLASSIC[i]);
-                break;
-            case CHAIN_KIND_PIRL:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_PIRL[i]);
-                break;
-            case CHAIN_KIND_POA:
-                    currentToken = (tokenDefinition_t *)PIC(&TOKENS_POA[i]);
-                    break;
-            case CHAIN_KIND_RSK:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_RSK[i]);
-                break;
-            case CHAIN_KIND_EXPANSE:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_EXPANSE[i]);
-                break;
-            case CHAIN_KIND_UBIQ:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_UBIQ[i]);
-                break;
-            case CHAIN_KIND_WANCHAIN:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_WANCHAIN[i]);
-                break;
-            case CHAIN_KIND_KUSD:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_KUSD[i]);
-                break;
-            case CHAIN_KIND_MUSICOIN:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_MUSICOIN[i]);
-                break;
-            case CHAIN_KIND_CALLISTO:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_CALLISTO[i]);
-                break;
-            case CHAIN_KIND_ETHERSOCIAL:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHERSOCIAL[i]);
-                break;
-            case CHAIN_KIND_ELLAISM:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ELLAISM[i]);
-                break;
-            case CHAIN_KIND_ETHER1:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHER1[i]);
-                break;
-            case CHAIN_KIND_ETHERGEM:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ETHERGEM[i]);
-                break;
-            case CHAIN_KIND_ATHEIOS:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_ATHEIOS[i]);
-                break;
-            case CHAIN_KIND_GOCHAIN:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_GOCHAIN[i]);
-                break;
-            case CHAIN_KIND_MIX:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_MIX[i]);
-                break;
-            case CHAIN_KIND_REOSC:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_REOSC[i]);
-                break;
-            case CHAIN_KIND_HPB:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_HPB[i]);
-                break;
-            case CHAIN_KIND_TOMOCHAIN:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_TOMOCHAIN[i]);
-                break;
-            case CHAIN_KIND_TOBALABA:
-                currentToken = (tokenDefinition_t *)PIC(&TOKENS_TOBALABA[i]);
                 break;
         }
         if (os_memcmp(currentToken->address, tmpContent.txContent.destination, 20) == 0) {
@@ -2108,7 +1965,6 @@ void handleGetPublicKey(uint8_t p1, uint8_t p2, uint8_t *dataBuffer, uint16_t da
   cx_ecfp_generate_pair(CX_CURVE_256K1, &tmpCtx.publicKeyContext.publicKey, &privateKey, 1);
   os_memset(&privateKey, 0, sizeof(privateKey));
   os_memset(privateKeyData, 0, sizeof(privateKeyData));
-  // getEthAddressStringFromKey(&tmpCtx.publicKeyContext.publicKey, tmpCtx.publicKeyContext.address, &sha3);
   getMcAddressStringFromKey(&tmpCtx.publicKeyContext.publicKey, tmpCtx.publicKeyContext.address, &sha3);
 #ifndef NO_CONSENT
   if (p1 == P1_NON_CONFIRM)
@@ -2152,7 +2008,6 @@ void finalizeParsing(bool direct) {
   uint256_t gasPrice, startGas, uint256;
   uint32_t i;
   uint8_t address[41];
-  // uint8_t decimals = WEI_TO_ETHER;
   uint8_t decimals = WEI_TO_MC;
   uint8_t *ticker = (uint8_t *)PIC(chainConfig->coinName);
   uint8_t *feeTicker = (uint8_t *)PIC(chainConfig->coinName);
@@ -2203,7 +2058,6 @@ void finalizeParsing(bool direct) {
     }
   // Add address
   if (tmpContent.txContent.destinationLength != 0) {
-    // getEthAddressStringFromBinary(tmpContent.txContent.destination, address, &sha3);
     getMcAddressStringFromBinary(tmpContent.txContent.destination, address, &sha3);
     /*
     addressSummary[0] = '0';
@@ -2224,7 +2078,6 @@ void finalizeParsing(bool direct) {
     os_memmove((void*)addressSummary, CONTRACT_ADDRESS, sizeof(CONTRACT_ADDRESS));
     strcpy(strings.common.fullAddress, "Contract");
   }
-  // Add amount in ethers or tokens
   convertUint256BE(tmpContent.txContent.value.value, tmpContent.txContent.value.length, &uint256);
   tostring256(&uint256, 10, (char *)(G_io_apdu_buffer + 100), 100);
   i = 0;
@@ -2252,7 +2105,6 @@ void finalizeParsing(bool direct) {
   while (G_io_apdu_buffer[100 + i]) {
     i++;
   }
-  // adjustDecimals((char *)(G_io_apdu_buffer + 100), i, (char *)G_io_apdu_buffer, 100, WEI_TO_ETHER);
   adjustDecimals((char *)(G_io_apdu_buffer + 100), i, (char *)G_io_apdu_buffer, 100, WEI_TO_MC);
   i = 0;
   tickerOffset=0;
@@ -2710,7 +2562,6 @@ chain_config_t const C_chain_config = {
 };
 
 __attribute__((section(".boot"))) int main(int arg0) {
-// #ifdef USE_LIB_ETHEREUM
 #ifdef USE_LIB_MOAC
     chain_config_t local_chainConfig;
     os_memmove(&local_chainConfig, &C_chain_config, sizeof(chain_config_t));
@@ -2727,8 +2578,6 @@ __attribute__((section(".boot"))) int main(int arg0) {
         TRY {
             // ensure syscall will accept us
             check_api_level(CX_COMPAT_APILEVEL);
-            // delegate to Ethereum app/lib
-            // libcall_params[0] = "Ethereum";
             libcall_params[0] = "Moac";
             libcall_params[1] = 0x100; // use the Init call, as we won't exit
             libcall_params[2] = &local_chainConfig;
